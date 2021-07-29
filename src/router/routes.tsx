@@ -13,35 +13,31 @@ const routes: any[] = [
   {
     path: "/",
     exact: true,
-    key: "LOGIN",
-    meta: { isPublic: true },
+    meta: { key: "LOGIN", isPublic: true },
     component: lazy(() => import("@pages/Login")),
   },
   {
     path: "/register",
     exact: true,
-    key: "REGISTER",
-    meta: { isPublic: true },
+    meta: { key: "REGISTER", isPublic: true },
     component: lazy(() => import("@pages/Register")),
   },
   {
     path: "/404",
     exact: true,
-    key: "404",
-    meta: { isPublic: true },
+    meta: { key: "404", isPublic: true },
     component: lazy(() => import("@pages/404")),
   },
   {
     path: "/app",
-    key: "APP",
-    meta: { isPublic: true },
+    meta: { key: "APP", isPublic: true },
     component: () => {
       const auth = useAuth();
 
       return (
         <Switch>
           {appRoutes[auth.user?.role || 0].map((route: any) => (
-            <RouteWithSubRoutes key={route.key} {...route} />
+            <RouteWithSubRoutes key={route.meta.key} {...route} />
           ))}
         </Switch>
       );

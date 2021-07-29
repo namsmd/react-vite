@@ -26,6 +26,7 @@ module.exports = {
     "react/jsx-filename-extension": ["warn", { extensions: [".tsx"] }],
     "react/jsx-props-no-spreading": "off",
     "react/destructuring-assignment": "off",
+    "react/require-default-props": "off",
 
     "no-use-before-define": "off",
     "no-shadow": "off",

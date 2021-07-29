@@ -1,35 +1,27 @@
-import React from "react";
+import React, { InputHTMLAttributes } from "react";
 
-const InputLabel = ({ label, htmlFor }: any) => (
-  <label htmlFor={htmlFor} className="block text-sm font-medium text-gray-700">
-    {label}
-  </label>
-);
+type BaseInputProps = InputHTMLAttributes<HTMLInputElement> & {
+  label: string;
+  error?: string;
+};
 
-const Input = ({
-  type = "text",
-  name,
-  label,
-  placeholder,
-  value,
-  onChange,
-}: any) => (
-  <div className="mb-3">
-    {label && <InputLabel label={label} htmlFor={name} />}
+const BaseInput = (props: BaseInputProps) => (
+  <div className="mb-2">
+    {props.label && (
+      <label className="block text-sm font-medium text-gray-700">
+        {props.label}
+      </label>
+    )}
+
     <div className="mt-1 relative rounded-md shadow-sm">
       <input
-        id={name}
-        type={type}
-        name={name}
-        value={value}
-        onChange={(e) => {
-          onChange(e.target.value);
-        }}
-        className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
-        placeholder={placeholder}
+        {...props}
+        className="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
       />
     </div>
+
+    {props.error && <p className="text-sm text-red-400 mt-3">{props.error}</p>}
   </div>
 );
 
-export default Input;
+export default BaseInput;

@@ -3,9 +3,8 @@ import { lazy } from "react";
 const routes: any[] = [
   {
     path: "/app",
-    key: "PATIENT_DASHBOARD",
     exact: true,
-    meta: { isPublic: true },
+    meta: { key: "PATIENT_DASHBOARD" },
     component: lazy(() => import("./pages/Dashboard")),
   },
 ];

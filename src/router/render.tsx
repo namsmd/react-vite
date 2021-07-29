@@ -14,7 +14,7 @@ export const RouteWithSubRoutes = (route: any) => (
 const RenderRoutes = ({ routes }: any) => (
   <Switch>
     {routes.map((route: any) => (
-      <RouteWithSubRoutes key={route.key} {...route} />
+      <RouteWithSubRoutes key={route.meta.key} {...route} />
     ))}
   </Switch>
 );

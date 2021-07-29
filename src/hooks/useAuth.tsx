@@ -2,7 +2,8 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { firebaseAuth } from "@helpers/firebase";
 
 const useProvideAuth = () => {
-  const [user, setUser] = useState<any>(null);
+  // In first time we set user = false (initial value) and enable router loading.
+  const [user, setUser] = useState<any>(false);
   const [loginResponse, setLoginResponse] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -14,7 +15,6 @@ const useProvideAuth = () => {
       .then((res) => {
         setUser(res.user);
         setLoginResponse(res);
-        return res.user;
       })
       .finally(() => setLoading(false));
   };
@@ -26,7 +26,6 @@ const useProvideAuth = () => {
       .createUserWithEmailAndPassword(email, password)
       .then((res) => {
         setUser(res.user);
-        return res.user;
       })
       .finally(() => setLoading(false));
   };
@@ -47,8 +46,11 @@ const useProvideAuth = () => {
   // ... component that utilizes this hook to re-render with the ...
   // ... latest auth object.
   useEffect(() => {
-    const unsubscribe = firebaseAuth.onAuthStateChanged((_user) => {
-      setUser(_user || null);
+    const unsubscribe = firebaseAuth.onAuthStateChanged((firebaseUser) => {
+      // After firebase config, it'll automatic fetch currentUser.
+      // If don't have current user -> user = null.
+      // ... Then we'll disable router loading and redirect guest to login page
+      setUser(firebaseUser || null);
     });
 
     // Cleanup subscription on unmount
@@ -57,8 +59,8 @@ const useProvideAuth = () => {
 
   return {
     user,
-    loginResponse,
     loading,
+    loginResponse,
     logIn,
     logOut,
     register,
@@ -69,8 +71,8 @@ const useProvideAuth = () => {
 
 interface AuthContext {
   user?: any;
-  loginResponse: any;
   loading: boolean;
+  loginResponse: any;
   logIn: (email: string, password: string) => Promise<any>;
   logOut: () => Promise<any>;
   register: (email: string, password: string) => Promise<any>;

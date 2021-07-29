@@ -1,0 +1,43 @@
+button:focus,
+button:active {
+  outline: none;
+}
+.burger {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+.burger span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 22.5px;
+  height: 2px;
+  transition: all 0.33s, background 0s;
+  background: #4f4f4f;
+}
+.burger span:nth-child(1) {
+  width: 16.25px;
+}
+.burger span:nth-child(2) {
+  top: 7.5px;
+}
+.burger span:last-child {
+  top: 16px;
+  width: 11.25px;
+}
+.nav-open span:first-child {
+  top: 10px;
+  width: 22.5px;
+  transform: rotate(45deg);
+}
+.nav-open span:last-child {
+  top: 10px;
+  width: 22.5px;
+  transform: rotate(-45deg);
+}
+.nav-open span:nth-child(2) {
+  opacity: 0;
+  visibility: hidden;
+}

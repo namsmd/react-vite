@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { useAuth } from "@hooks/useAuth";
-import Button from "@components/Base/Button";
-import Input from "@components/Base/Input";
-import { BaseLoaderScreen } from "@components/Base";
 import { Link } from "react-router-dom";
+import { BaseLoaderScreen, BaseButton, BaseInput } from "@components/Base";
 
 const RegisterPage: React.FC = () => {
   const auth = useAuth();
@@ -13,26 +11,32 @@ const RegisterPage: React.FC = () => {
   const [pwd, setPWD] = useState("");
   const [error, setError] = useState("");
 
-  const register = () => {
+  const register = (event: any) => {
+    event.preventDefault();
     setError("");
     auth
       .register(email, pwd)
       .then(() => history.replace("/app"))
-      .catch((e) => setError(JSON.stringify(e, null, 2)));
+      .catch((e) => setError(e.message));
   };
 
-  return auth.loading ? (
-    <BaseLoaderScreen />
-  ) : (
-    <div className="h-screen w-screen flex justify-center items-center">
+  if (auth.loading) return <BaseLoaderScreen />;
+
+  return (
+    <div className="flex justify-center items-center">
       <div className="p-3">
         <form className="my-8 space-y-6 min-w-[400px]">
-          <Input label="Email" value={email} onChange={setEmail} />
-          <Input
+          <BaseInput
+            type="text"
+            label="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <BaseInput
             type="password"
             label="Password"
             value={pwd}
-            onChange={setPWD}
+            onChange={(e) => setPWD(e.target.value)}
           />
 
           {error && (
@@ -46,7 +50,9 @@ const RegisterPage: React.FC = () => {
             <Link className="text-sm text-blue-600 underline" to="/">
               Go to login
             </Link>
-            <Button onClick={register}>Register</Button>
+            <BaseButton type="submit" onClick={register}>
+              Register
+            </BaseButton>
           </div>
         </form>
       </div>
