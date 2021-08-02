@@ -1,11 +1,10 @@
 import React from "react";
-import { BaseLoaderScreen } from "@components/Base";
-import { GuardProvider, GuardFunction } from "react-router-guards";
+import { GuardProvider, GuardFunction } from "@vendor/react-router-guards";
 import {
   GuardFunctionRouteProps,
   GuardToRoute,
   Next,
-} from "react-router-guards/dist/types";
+} from "@vendor/react-router-guards/dist/types";
 
 export const CusGuardProvider = ({ children, guards, auth }: any) => {
   const customGuards = guards.map(
@@ -14,9 +13,5 @@ export const CusGuardProvider = ({ children, guards, auth }: any) => {
         g({ ...to, meta: { ...to.meta, user: auth?.user } }, form, next)
   );
 
-  return (
-    <GuardProvider guards={customGuards} loading={BaseLoaderScreen}>
-      {children}
-    </GuardProvider>
-  );
+  return <GuardProvider guards={customGuards}>{children}</GuardProvider>;
 };

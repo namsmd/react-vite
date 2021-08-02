@@ -22,6 +22,7 @@ module.exports = {
   plugins: ["react", "@typescript-eslint", "prettier"],
   rules: {
     "prettier/prettier": ["error"],
+    "max-len": [2, { code: 120, tabWidth: 2, ignoreUrls: true }],
 
     "react/jsx-filename-extension": ["warn", { extensions: [".tsx"] }],
     "react/jsx-props-no-spreading": "off",
@@ -38,6 +39,7 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
 
+    "import/order": "off",
     "import/prefer-default-export": "off",
     "import/no-extraneous-dependencies": ["error", { devDependencies: true }],
     "import/extensions": [

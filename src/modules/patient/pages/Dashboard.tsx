@@ -1,31 +1,20 @@
-import Button from "@components/Base/Button";
-import { useAuth } from "@hooks/useAuth";
 import React from "react";
-import { useHistory } from "react-router";
+import { useAuth } from "@hooks/useAuth";
+import Button from "@components/Base/Button";
 
 const PatientDashboard: React.FC = () => {
-  const auth = useAuth();
-  const history = useHistory();
-
-  const logOut = () => auth.logOut().then(() => history.replace("/"));
+  const { user } = useAuth();
 
   return (
-    <div className="h-screen w-screen flex flex-col justify-center items-center">
-      <div className="mb-3 shadow p-3 bg-gray-100 max-h-[400px] overflow-scroll">
-        <p className="text-base">Login response:</p>
-        <pre className="max-w-[800px] whitespace-pre-wrap break-words text-sm">
-          {JSON.stringify(auth.loginResponse, null, 2)}
-        </pre>
+    <div>
+      <div>
+        <h1 className="text-xl">Hi, {user?.name}</h1>
+        <p className="text-base">How are you today?</p>
       </div>
 
-      <div className="mb-8 shadow p-3 bg-gray-100 max-h-[400px] overflow-scroll">
-        <p className="text-base">User data</p>
-        <pre className="max-w-[800px] whitespace-pre-wrap break-words text-sm">
-          {JSON.stringify(auth.user, null, 2)}
-        </pre>
+      <div>
+        <Button className="rounded-lg">iDoctor</Button>
       </div>
-
-      <Button onClick={logOut}>Log out</Button>
     </div>
   );
 };

@@ -1,7 +1,14 @@
-import React from "react";
+import React, { BaseHTMLAttributes } from "react";
 
-const BaseLoaderScreen: React.FC = () => (
-  <div className="fixed bg-white top-0 left-0 right-0 bottom-0 z-50 boxes-container">
+type LoaderScreenProps = BaseHTMLAttributes<HTMLDivElement> & {
+  type?: string;
+};
+
+const BaseLoaderScreen = ({ children, type = "fixed" }: LoaderScreenProps) => (
+  <div
+    className={`${type} bg-white top-0 left-0 right-0 bottom-0 z-50 boxes-container flex flex-col`}
+  >
+    {/* boxes css already import in index.html */}
     <div className="boxes">
       {Array.from({ length: 4 }, (_, k) => (
         <div className="box" key={k}>
@@ -12,6 +19,7 @@ const BaseLoaderScreen: React.FC = () => (
         </div>
       ))}
     </div>
+    {children}
   </div>
 );
 

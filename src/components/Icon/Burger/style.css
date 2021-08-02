@@ -16,6 +16,8 @@ button:active {
   height: 2px;
   transition: all 0.33s, background 0s;
   background: #4f4f4f;
+  border-radius: 3px;
+  @apply shadow;
 }
 .burger span:nth-child(1) {
   width: 16.25px;

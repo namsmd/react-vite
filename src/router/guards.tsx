@@ -1,4 +1,4 @@
-import { GuardFunction } from "react-router-guards";
+import { GuardFunction } from "@vendor/react-router-guards";
 
 export const requireLogin: GuardFunction = (to, _from, next) => {
   // If guest tries to access private pages

@@ -17,13 +17,18 @@
     "baseUrl": "./src",
     "paths": {
       "@assets/*": ["assets/*"],
+      "@context": ["context"],
+      "@context/*": ["context/*"],
+      "@components/*": ["components/*"],
+      "@icons/*": ["components/Icon/*"],
       "@helpers/*": ["helpers/*"],
+      "@hooks": ["hooks"],
+      "@hooks/*": ["hooks/*"],
+      "@modules/*": ["modules/*"],
+      "@pages/*": ["pages/*"],
       "@router": ["router"],
       "@router/*": ["router/*"],
-      "@hooks/*": ["hooks/*"],
-      "@pages/*": ["pages/*"],
-      "@components/*": ["components/*"],
-      "@modules/*": ["modules/*"]
+      "@vendor/*": ["vendor/*"]
     }
   },
   "include": ["./src"]

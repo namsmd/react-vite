@@ -1,36 +1,33 @@
 import React, { BaseHTMLAttributes } from "react";
-import { BrowserView, MobileView } from "react-device-detect";
+import { useAuth, useViewPort } from "@hooks";
 import { BurgerIcon } from "@components/Icon";
 import Avatar from "@components/Avatar";
+import Breadcrumb from "@components/Layout/Breadcrumb";
 
 type HeaderProps = BaseHTMLAttributes<HTMLElement> & {
   collapsed: boolean;
-  onClickBurderIcon: () => void;
+  onClickBurgerIcon: () => void;
 };
 
-const Header = ({ collapsed, onClickBurderIcon }: HeaderProps) => (
-  <header className="p-3 flex justify-end">
-    <div className="flex-grow">
-      <MobileView>
-        <BurgerIcon collapsed={collapsed} onClick={onClickBurderIcon} />
-      </MobileView>
+const Header = ({ collapsed, onClickBurgerIcon }: HeaderProps) => {
+  const { user } = useAuth();
+  const { isMobile } = useViewPort();
 
-      <BrowserView>
-        <nav aria-label="breadcrumb">
-          <ol className="flex leading-none text-indigo-600 divide-x divide-indigo-400">
-            <li className="pr-4">Home</li>
-            <li className="px-4 text-gray-700" aria-current="page">
-              Blog
-            </li>
-          </ol>
-        </nav>
-      </BrowserView>
-    </div>
+  return (
+    <header className="p-3 flex justify-end items-center">
+      <div className="flex-grow">
+        {isMobile ? (
+          <BurgerIcon collapsed={collapsed} onClick={onClickBurgerIcon} />
+        ) : (
+          <Breadcrumb />
+        )}
+      </div>
 
-    <div>
-      <Avatar src="" badge />
-    </div>
-  </header>
-);
+      <div>
+        <Avatar src={user?.photoURL} badge />
+      </div>
+    </header>
+  );
+};
 
 export default Header;

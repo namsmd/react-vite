@@ -1,28 +1,40 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
-import { BaseLoaderScreen } from "@components/Base";
-
 import { useAuth } from "@hooks/useAuth";
 import { CusGuardProvider } from "@helpers/router-guards";
-import { requireLogin, blockPublicPageAfterLogged } from "./guards";
+import { Router as BrowserRouter } from "react-router-dom";
+import { createBrowserHistory } from "history";
 
-import Routes from "./routes";
 import RenderRoutes from "./render";
+import { privateRoutes, publicRoutes } from "./routes";
+import { blockPublicPageAfterLogged, requireLogin } from "./guards";
+
+import { BaseLoaderScreen } from "@components/Base";
+import { MainLayout } from "@components/Layout";
+
+const history = createBrowserHistory();
+
+const MainRoutes = () => (
+  <MainLayout>
+    <RenderRoutes
+      loading={() => <BaseLoaderScreen type="absolute" />}
+      routes={privateRoutes}
+    />
+  </MainLayout>
+);
 
 const AppRoutes: React.FC = () => {
   const auth = useAuth();
-
-  // show loading screen while first time fetching user data
   if (auth.user === false) return <BaseLoaderScreen />;
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={history}>
       <CusGuardProvider
         auth={auth}
-        loading={BaseLoaderScreen}
         guards={[requireLogin, blockPublicPageAfterLogged]}
       >
-        <RenderRoutes routes={Routes} />
+        <RenderRoutes loading={BaseLoaderScreen} routes={publicRoutes} />
+
+        {auth.user && <MainRoutes />}
       </CusGuardProvider>
     </BrowserRouter>
   );
