@@ -3,6 +3,7 @@ import React, { SVGAttributes } from "react";
 
 const HomeIcon = (props: SVGAttributes<HTMLOrSVGElement>) => (
   <svg
+    className="mx-1"
     width="21"
     height="20"
     viewBox="0 0 21 20"

@@ -31,7 +31,7 @@ const uiConfig = {
   ],
 };
 
-export const firebaseAuth = firebase.auth();
+export const firebaseAuth = firebase.auth;
 export const FirebaseAuthUI = () => (
   <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebaseAuth} />
 );

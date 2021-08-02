@@ -14,7 +14,7 @@ const MenuItem = (props: any) => {
 
   return (
     <li
-      className="h-[56px] cursor-pointer text-white"
+      className="h-[56px] cursor-pointer text-white whitespace-nowrap"
       onClick={handleOnclick}
       aria-hidden="true"
     >
@@ -22,7 +22,7 @@ const MenuItem = (props: any) => {
         {props.icon && (
           <props.icon style={{ color: isActive ? "#F7931E" : "unset" }} />
         )}
-        <span className="ml-2">{props.name}</span>
+        <span className="ml-1">{props.name}</span>
       </p>
     </li>
   );

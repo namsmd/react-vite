@@ -8,7 +8,7 @@ const PatientDashboard: React.FC = () => {
   return (
     <div>
       <div>
-        <h1 className="text-xl">Hi, {user?.name}</h1>
+        <h1 className="text-xl">Hi, {user?.firstName}</h1>
         <p className="text-base">How are you today?</p>
       </div>
 

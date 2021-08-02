@@ -24,7 +24,7 @@ const Header = ({ collapsed, onClickBurgerIcon }: HeaderProps) => {
       </div>
 
       <div>
-        <Avatar src={user?.photoURL} badge />
+        <Avatar src={user?.avatar} badge />
       </div>
     </header>
   );

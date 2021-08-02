@@ -32,9 +32,9 @@ const AppRoutes: React.FC = () => {
         auth={auth}
         guards={[requireLogin, blockPublicPageAfterLogged]}
       >
-        <RenderRoutes loading={BaseLoaderScreen} routes={publicRoutes} />
-
         {auth.user && <MainRoutes />}
+
+        <RenderRoutes loading={BaseLoaderScreen} routes={publicRoutes} />
       </CusGuardProvider>
     </BrowserRouter>
   );
